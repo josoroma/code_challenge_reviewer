@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "code_challenge_reviewer"
+version = "1.0.0"
+description = "Code Challenge Reviewer"
+authors = ["Josoroma <pablo@josoroma.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.9,<=3.13"
+langchain = "^0.2.11"
+langchain-community = "^0.2.10"
+crewai = {extras = ["tools"], version = "^0.41.1"}
+requests = "^2.32.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
