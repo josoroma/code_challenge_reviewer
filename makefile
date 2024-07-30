@@ -9,7 +9,7 @@ add:
 run:
 	poetry run python -V
 	poetry run which python
-	PYTHONHTTPSVERIFY=0 poetry run python -m main -vv
+	PYTHONHTTPSVERIFY=0 poetry run python -m src.main -vv
 
 clean:
 	rm -rf `poetry env info -p`

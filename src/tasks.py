@@ -42,7 +42,7 @@ class Tasks:
                     - code_review: detailed explain the code review for this code, provide feedback on the code quality, bugs, anti-patterns, improvements, and compliance.
                     - updated_code: updated code of file after making code review and changes.
 
-                    The `updated_code` output string must be a string in typescript format. This `updated_code` output string should be involved by backticks such as ```typescript updated_code_output ```.
+                    The `updated_code` output string must be a string in python format. This `updated_code` output string should be involved by backticks such as ```python updated_code_output ```.
                     
                     Only return the explained and reviewed file content. If there are multiple explains and reviews, return the entire reviewed file content in markdown format.
 
@@ -81,13 +81,12 @@ class Tasks:
 
                     Please return the FULL path of a given file in the given folder tree structure. For example, if the tree structure looks like this:
 
-                    - components
-                      - ui
-                        - avatar.tsx
-                        - button.tsx
-                        - dropdown-menu.tsx
+                    - src
+                      - agents.py
+                      - main.py
+                      - tools.py
 
-                    Then the full path of avatar.tsx will be "components/ui/avatar.tsx".
+                    Then the full path of agents.py will be "src/agents.py".
 
                     DON'T send every file content at once, send it one by one to review_agent.
 
@@ -104,7 +103,7 @@ class Tasks:
                 expected_output="""
                     ONLY an array of paths.
                     For example:
-                    ['components/ui/avatar.tsx', 'components/ui/button.tsx']
+                    ['src/agents.py', 'src/main.py']
                 """
             )
         except Exception as e:

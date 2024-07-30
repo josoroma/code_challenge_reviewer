@@ -2,18 +2,18 @@ import ast
 from datetime import datetime
 import logging
 import warnings
-from agents import Agents
-from github_helper import get_file_tree
-from review_crew import ReviewCrew
-from tasks import Tasks
+from src.agents import Agents
+from src.github_helper import get_file_tree
+from src.review_crew import ReviewCrew
+from src.tasks import Tasks
 
 def main():
     """
     Main function to execute the review process on a given GitHub repository.
     """
     # Take input from user
-    github_url = "https://github.com/josoroma/New-Kidz-On-The-Grid"
-    user_input = "app/(pages)/blog"
+    github_url = "https://github.com/josoroma/code_challenge_reviewer"
+    user_input = "src"
 
     # Extract owner and repository name from GitHub URL
     split_url = github_url.split('/')
