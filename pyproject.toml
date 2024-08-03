@@ -7,6 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.11.9,<=3.13"
+streamlit = "^1.37.0"
+langchain = "^0.2.11"
+langchain-community = "^0.2.10"
+crewai = {extras = ["tools"], version = "^0.41.1"}
+requests = "^2.32.3"
+python-dotenv = "^1.0.1"
+watchdog = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,7 +1,25 @@
 import os
+import re
+import streamlit as st
+import logging
 from crewai import Crew
-from src.agents import Agents
-from src.tasks import Tasks
+from agents import Agents
+from tasks import Tasks
+
+# Create a custom logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Create handlers
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+
+# Create formatters and add them to the handlers
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+
+# Add handlers to the logger
+logger.addHandler(console_handler)
 
 
 class ReviewCrew:
@@ -23,6 +41,7 @@ class ReviewCrew:
         self.repo = repo
         self.path = path
         self.output = output
+        self.output_placeholder = st.empty()
 
     def append_review_to_file(self, result):
         """
@@ -79,15 +98,15 @@ class ReviewCrew:
             )
 
             # Run the crew
-            result = crew.kickoff()
+            kickoff_result = crew.kickoff()
+            
+            str_result = str(kickoff_result).strip()
 
-            if result:
-                self.append_review_to_file(str(result))
-                print("\n----------------------------------------------------------------------\n")
-                print(f"ReviewCrew Markdown Output: \n\n{str(result)}\n\n")
-                print("\n----------------------------------------------------------------------\n")
-            else:
-                print("Failed to extract JSON array from the result.")
+            result = re.sub(r'^```markdown|```$', '', str_result, flags=re.DOTALL)
+
+            self.output_placeholder.code(f"\n\nresult\n\n", language='bash')
+            
+            return result
 
         except Exception as e:
             print(f"Error running ReviewCrew: {e}")

@@ -4,12 +4,12 @@ setup:
 	poetry shell
 
 add:
-	poetry add langchain langchain-community crewai 'crewai[tools]' requests
+	poetry add streamlit langchain langchain-community crewai 'crewai[tools]' requests python-dotenv watchdog
 
 run:
 	poetry run python -V
 	poetry run which python
-	PYTHONHTTPSVERIFY=0 poetry run python -m src.main -vv
+	poetry run -vv streamlit run app.py
 
 clean:
 	rm -rf `poetry env info -p`

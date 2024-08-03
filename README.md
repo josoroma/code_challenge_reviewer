@@ -29,6 +29,7 @@ These Crew Agents help to maintain high standards of code quality in your projec
 ## .env
 
 ```
+PYTHONPATH=src
 GITHUB_KEY=ghp_...
 OPENAI_API_KEY=sk-p...
 OPENAI_MODEL_NAME=gpt-4o-mini

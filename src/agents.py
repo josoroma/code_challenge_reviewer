@@ -1,5 +1,7 @@
+import re
 from crewai import Agent
-from src.tools import Tools
+import streamlit as st
+from tools import Tools
 
 
 class Agents:
@@ -64,3 +66,34 @@ class Agents:
         except Exception as e:
             print(f"Error creating content agent: {e}")
             return None
+
+class StreamToExpander:
+    def __init__(self, expander):
+        self.expander = expander
+        self.buffer = []
+        self.colors = ['red', 'green', 'blue', 'orange']  # Define a list of colors
+        self.color_index = 0  # Initialize color index
+
+    def write(self, data):
+        # Filter out ANSI escape codes using a regular expression
+        cleaned_data = re.sub(r'\x1B\[[0-9;]*[mK]', '', data)
+
+        # Check if the data contains 'task' information
+        task_match_object = re.search(r'\"task\"\s*:\s*\"(.*?)\"', cleaned_data, re.IGNORECASE)
+        task_match_input = re.search(r'task\s*:\s*([^\n]*)', cleaned_data, re.IGNORECASE)
+        
+        task_value = None
+        
+        if task_match_object:
+            task_value = task_match_object.group(1)
+        elif task_match_input:
+            task_value = task_match_input.group(1).strip()
+
+        if task_value:
+            st.toast(":robot_face: " + task_value)
+            
+        self.buffer.append(cleaned_data)
+
+        if "\n" in data:
+            self.expander.code(''.join(self.buffer), language='bash')
+            self.buffer = []

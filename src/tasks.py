@@ -42,6 +42,8 @@ class Tasks:
                     - code_review: detailed explain the code review for this code, provide feedback on the code quality, bugs, anti-patterns, improvements, and compliance.
                     - updated_code: updated code of file after making code review and changes.
 
+                    The attributes returned must be in markdown format, as heading h2 or ## and the value as its nested text.
+
                     The `updated_code` output string must be a string in python format. This `updated_code` output string should be involved by backticks such as ```python updated_code_output ```.
                     
                     Only return the explained and reviewed file content. If there are multiple explains and reviews, return the entire reviewed file content in markdown format.
@@ -55,14 +57,14 @@ class Tasks:
             print(f"Error creating review task: {e}")
             return None
 
-    def get_file_path_task(self, agent, file_tree, user_input):
+    def get_file_path_task(self, agent, file_tree, repo_directory):
         """
         Creates a task to get the file path from a given tree structure.
 
         Parameters:
             agent (Agent): The agent responsible for performing the task.
             file_tree (str): The tree structure of the folder.
-            user_input (str): The user input (file or folder name).
+            repo_directory (str): The user input (file or folder name).
 
         Returns:
             Task: Configured task for extracting file paths.
@@ -71,13 +73,13 @@ class Tasks:
             return Task(
                 agent=agent,
                 description=f"""
-                    You are given a tree structure of folder and user_input. First, you have to decide whether it is a folder or file from the given tree structure of a folder.
+                    You are given a tree structure of folder and repo_directory. First, you have to decide whether it is a folder or file from the given tree structure of a folder.
 
                     Follow this approach:
 
                     - If it's a file then return array with 1 element which contains the full path of that file in this folder structure.
                     - If it's a folder then return array of paths of sub files inside that folder. If there is a subfolder in given folder, then return paths for those files as well.
-                    - If user_input is not present in given tree structure then just return an empty array.
+                    - If repo_directory is not present in given tree structure then just return an empty array.
 
                     Please return the FULL path of a given file in the given folder tree structure. For example, if the tree structure looks like this:
 
@@ -96,7 +98,7 @@ class Tasks:
 
                     Here is user input:
 
-                    {user_input}
+                    {repo_directory}
 
                     NOTE: ONLY RETURN ARRAY OF PATHS WITHOUT ANY EXTRA TEXT IN RESPONSE.
                 """,

@@ -1,5 +1,6 @@
 import os
 import requests
+import streamlit as st
 
 # Ensure environment variable is set for GITHUB_KEY
 GITHUB_KEY = os.getenv('GITHUB_KEY')
@@ -43,7 +44,7 @@ def get_file_tree(owner, repo, path="", level=0):
 
                 item_name = f"{' ' * (level * 2)}- {item['name']}"
 
-                print(item_name)
+                st.code(item_name, language='bash')
 
                 global_path += f"{item_name}\n"
 
