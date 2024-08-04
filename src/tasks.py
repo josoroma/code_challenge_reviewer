@@ -57,7 +57,7 @@ class Tasks:
             print(f"Error creating review task: {e}")
             return None
 
-    def get_file_path_task(self, agent, file_tree, repo_directory):
+    def get_file_path_task(self, agent, file_tree, repo_directory, repo_structure, repo_file_sample, repo_fullpath_sample, repo_output_sample):
         """
         Creates a task to get the file path from a given tree structure.
 
@@ -83,12 +83,9 @@ class Tasks:
 
                     Please return the FULL path of a given file in the given folder tree structure. For example, if the tree structure looks like this:
 
-                    - src
-                      - agents.py
-                      - main.py
-                      - tools.py
+                    {repo_structure}
 
-                    Then the full path of agents.py will be "src/agents.py".
+                    Then the full path of {repo_file_sample} will be "{repo_fullpath_sample}".
 
                     DON'T send every file content at once, send it one by one to review_agent.
 
@@ -102,10 +99,10 @@ class Tasks:
 
                     NOTE: ONLY RETURN ARRAY OF PATHS WITHOUT ANY EXTRA TEXT IN RESPONSE.
                 """,
-                expected_output="""
+                expected_output=f"""
                     ONLY an array of paths.
                     For example:
-                    ['src/agents.py', 'src/main.py']
+                    {repo_output_sample}
                 """
             )
         except Exception as e:
