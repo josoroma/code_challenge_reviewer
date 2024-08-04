@@ -104,7 +104,9 @@ class ReviewCrew:
 
             result = re.sub(r'^```markdown|```$', '', str_result, flags=re.DOTALL)
 
-            self.output_placeholder.code(f"\n\nresult\n\n", language='bash')
+            self.append_review_to_file(f"\n\n{result}\n\n")
+
+            self.output_placeholder.code(f"\n\n{result}\n\n", language='bash')
             
             return result
 

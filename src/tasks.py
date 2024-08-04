@@ -36,15 +36,15 @@ class Tasks:
 
                     Return the following values in the markdown content output:
 
-                    - project_name: {repo}.
-                    - path: {path}.
-                    - explain_this: generate documentation for this code, explain the entire code in a few lines.
-                    - code_review: detailed explain the code review for this code, provide feedback on the code quality, bugs, anti-patterns, improvements, and compliance.
-                    - updated_code: updated code of file after making code review and changes.
+                    - Project Name: {repo}.
+                    - Path: {path}.
+                    - Explain This: generate documentation for this code, explain the entire code in a few lines.
+                    - Code Review: detailed explain the code review for this code, provide feedback on the code quality, bugs, anti-patterns, improvements, and compliance.
+                    - Updated Code: updated code of file after making code review and changes.
 
                     The attributes returned must be in markdown format, as heading h2 or ## and the value as its nested text.
 
-                    The `updated_code` output string must be a string in python format. This `updated_code` output string should be involved by backticks such as ```python updated_code_output ```.
+                    The `Updated Code` output string must be a string in python format. This `Updated Code` output string should be involved by backticks such as ```python updated_code_output ```.
                     
                     Only return the explained and reviewed file content. If there are multiple explains and reviews, return the entire reviewed file content in markdown format.
 

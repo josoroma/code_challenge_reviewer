@@ -15,6 +15,7 @@ requests = "^2.32.3"
 python-dotenv = "^1.0.1"
 watchdog = "^4.0.1"
 rx = "^3.2.0"
+markdown = "^3.6"
 
 [build-system]
 requires = ["poetry-core"]
