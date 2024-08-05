@@ -2,6 +2,12 @@
 
 These Crew Agents are a powerful tool designed to perform thorough code reviews on your files, ensuring they adhere to industry standards. These agents help to: evaluate code quality, identify potential bugs, spot anti-patterns, and suggest improvements to enhance the overall quality and maintainability of your codebase.
 
+## UX for Agentic Tool: CrewAI + Streamlit
+
+![alt text](01.jpeg "Code Review Assistant")
+
+![alt text](02.jpeg "Code Review Assistant")
+
 ### Features
 
 - **Code Quality Assessment**: Evaluates the readability, maintainability, and efficiency of your code.
