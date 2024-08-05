@@ -45,7 +45,7 @@ class ReviewCrew:
 
     def append_review_to_file(self, result):
         """
-        Appends the explain and the review result to a markdown file.
+        Appends the review result to a markdown file.
 
         Parameters:
             result (str): The str containing the explain and the review results in markdown format.
@@ -59,7 +59,7 @@ class ReviewCrew:
 
         try:
             with open(file_path, 'a') as file:
-                file.write(f"\n\n# {self.repo} - {self.path}\n\n")
+                file.write(f"\n\n# {self.path}\n\n")
                 file.write(result)
         except Exception as e:
             logger.error(f"Error writing to file: {e}")
@@ -102,11 +102,11 @@ class ReviewCrew:
 
             str_result = str(kickoff_result).strip()
 
-            result = re.sub(r'^```markdown|```$', '', str_result, flags=re.DOTALL)
+            result = re.sub(r'```markdown|```$', '', str_result, flags=re.DOTALL)
 
             self.append_review_to_file(f"\n\n{result}\n\n")
 
-            self.output_placeholder.code(f"\n\n{result}\n\n", language='markdown')
+            self.output_placeholder.code(f"\n\n{result}\n\n", language='bash')
 
             return result
 

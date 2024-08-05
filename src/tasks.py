@@ -1,6 +1,5 @@
-from crewai import Task
 import logging
-from crewai import Agent
+from crewai import Task, Agent
 
 class Tasks:
     """
@@ -26,33 +25,36 @@ class Tasks:
                 description=f"""
                     Review the given file and provide detailed feedback and a code review to ensure it adheres to industry code quality standards.
 
-                    - Take the file path and file contents from `content_agent`.
-                    - Provide a detailed code review with feedback on the following aspects:
-                       * Code Quality
-                       * Bugs
-                       * Anti-Patterns
-                       * Improvements
-                       * Compliance
-                    - Make necessary improvements to the file content and return the updated content as `updated_code`.
+                    - File Input: Take the file path and file contents from content_agent.
+                    
+                    - Code Review Requirements:
+                        - Code Quality: Assess the overall quality of the code.
+                        - Bugs: Identify any bugs present in the code.
+                        - Anti-Patterns: Point out any anti-patterns and suggest improvements.
+                        - Improvements: Recommend general improvements.
+                        - Compliance: Check for compliance with industry standards and best practices.
+                        - Improvements: Make necessary improvements to the file content and return the updated content as updated_code.
+                    
+                    Output values to return
 
-                    Return the following values in the markdown content output:
+                    Return the following values in the Markdown content output:
 
-                    - Project Name: {repo}.
-                    - Path: {path}.
-                    - Explain This: generate documentation for this code, explain the entire code in a few lines.
-                    - Code Review: detailed explain the code review for this code, provide feedback on the code quality, bugs, anti-patterns, improvements, and compliance.
-                    - Updated Code: updated code of file after making code review and changes.
+                    Project Name: {repo}
+                    Path: {path}
+                    Explain This: Generate documentation for the code, explaining the entire code in a few lines.
+                    Code Review: Provide detailed feedback on code quality, bugs, anti-patterns, improvements, and compliance.
+                    Updated Code: Return the updated code of the file after making the necessary changes.
+                    
+                    Output Format
 
-                    The attributes returned must be in markdown format, as heading h2 or ## and the value as its nested text.
-
-                    The `Updated Code` output string must be a string in python format. This `Updated Code` output string should be involved by backticks such as ```python updated_code_output ```.
-
-                    Only return the explained and reviewed file content. If there are multiple explains and reviews, return the entire reviewed file content in markdown format.
-
-                    Task output must be a string in markdown format and ensure the markdown content is accurate and well-structured.
+                    The returned attributes must be in Markdown format, with each section as an H2 heading (##) and the corresponding values as nested text.
+                    
+                    For "Explain This" and "Code Review", consolidate multiple explanations and reviews into a single cohesive output for each section.
+                    
+                    Enclose the entire output in triple backticks with the format specified as markdown, like this: ```markdown output``` .
                 """,
                 context=context,
-                expected_output="Only return the string output in markdown format and ensure the markdown content is accurate and well-structured."
+                expected_output="NOTE: Return the entire output formatted as Markdown, enclosed within triple backticks like this: ```markdown output```"
             )
         except Exception as e:
             logging.error(f"Error creating review task: {e}")

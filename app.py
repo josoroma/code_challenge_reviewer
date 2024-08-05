@@ -101,7 +101,7 @@ class App:
             review_crew = ReviewCrew(owner=owner, repo=repo, path=path, output=output)
             result = review_crew.run()
             
-            output_placeholder += "\n\n" + result + "\n\n```\n\n---"
+            output_placeholder += "\n\n" + result + "\n\n---"
             
             st.markdown(f"\n\n{result}\n\n")
 
